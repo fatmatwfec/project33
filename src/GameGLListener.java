@@ -7,18 +7,24 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 
 public class GameGLListener implements GLEventListener, KeyListener {
-
+    private static final int MAX_X = 800;
+    private static final int MIN_X = 0;
+    private static final int MAX_Y = 500;
+    private static final int MIN_Y = 0;
 
     private double xBall=MAX_X/2;
     private double yBall=MAX_Y/2;
     private double dxBall= 10 ; ;
     private double dyBall= 8;;
 
-
+    int maxWidth = 100;
+    int maxHeight = 100;
+    int xplayer1 = maxWidth/2, yplayer1 = maxHeight/2;
+    int xplayer2 = maxWidth/2, yplayer2 = maxHeight/2;
 
     private int score1=0;
     private int score2=0;
-    String textureName = "B1.png";
+    String textureName = "ball4.png";
     TextureReader.Texture texture;
     int ballTexture[] = new int[1];
 
@@ -34,7 +40,12 @@ public class GameGLListener implements GLEventListener, KeyListener {
             dyBall = -dyBall;
         }
         // collision with players
-
+        if( Math.abs(xplayer1-xBall)<1 ||  Math.abs(xplayer2-xBall)<1){
+            dxBall=-dxBall;
+        }
+        if( Math.abs(yplayer1-yBall)<1 ||  Math.abs(yplayer2-yBall)<1 ){
+            dyBall=-dyBall;
+        }
     }
 
     public void player1MakeGoal(){
@@ -88,7 +99,7 @@ public class GameGLListener implements GLEventListener, KeyListener {
     public void init(GLAutoDrawable glAutoDrawable) {
         GL gl = glAutoDrawable.getGL();
 
-        gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
         gl.glOrtho(MIN_X, MAX_X, MIN_Y, MAX_Y, -1.0, 1.0);
