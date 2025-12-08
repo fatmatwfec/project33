@@ -1,4 +1,6 @@
+import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameGLListener implements GLEventListener, KeyListener {
@@ -45,5 +47,61 @@ public class GameGLListener implements GLEventListener, KeyListener {
             return "player2 is win";
         else
             return null;
+    }
+    public void reset(){
+        xBall=0;
+        yBall=0;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void init(GLAutoDrawable glAutoDrawable) {
+
+    }
+
+    @Override
+    public void display(GLAutoDrawable glAutoDrawable) {
+
+
+        //update ball position
+        updateball();
+        // make goal
+        if(xBall<=xmin){
+            player1MakeGoal();
+            reset();
+        }
+        if(xBall>=xmax){
+            player2MakeGoal();
+            reset();
+        }
+        // win massage
+        if (hasWinner()) {
+            System.out.println(winner());
+
+        }
+    }
+
+    @Override
+    public void reshape(GLAutoDrawable glAutoDrawable, int i, int i1, int i2, int i3) {
+
+    }
+
+    @Override
+    public void displayChanged(GLAutoDrawable glAutoDrawable, boolean b, boolean b1) {
+
     }
 }
