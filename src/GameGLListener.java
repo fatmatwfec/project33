@@ -14,8 +14,9 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
     private double xBall=MAX_X/2;
     private double yBall=MAX_Y/2;
-    private double dxBall= 10 ; ;
-    private double dyBall= 8;;
+    private double dxBall= 4;
+    private double dyBall= 2;
+    private final double ballSize=30;
 
     int maxWidth = 100;
     int maxHeight = 100;
@@ -33,17 +34,17 @@ public class GameGLListener implements GLEventListener, KeyListener {
         yBall += dyBall;
         //تغيير الاتجاه لو الكرة خبطت فى الحواف
 
-        if(xBall+20 >= MAX_X || xBall <= MIN_X){
+        if(xBall+ballSize >= MAX_X || xBall<= MIN_X){
             dxBall = -dxBall;
         }
-        if(yBall+20>= MAX_Y || yBall <= MIN_Y){
+        if(yBall+ballSize>= MAX_Y || yBall <= MIN_Y){
             dyBall = -dyBall;
         }
         // collision with players
-        if( Math.abs(xplayer1-xBall)<1 ||  Math.abs(xplayer2-xBall)<1){
+        if( Math.abs(xplayer1-xBall)<30 ||  Math.abs(xplayer2-xBall)<30){
             dxBall=-dxBall;
         }
-        if( Math.abs(yplayer1-yBall)<1 ||  Math.abs(yplayer2-yBall)<1 ){
+        if( Math.abs(yplayer1-yBall)<30 ||  Math.abs(yplayer2-yBall)<30 ){
             dyBall=-dyBall;
         }
     }
@@ -146,11 +147,11 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
 
         // make goal
-        if(xBall+30 <=50 && yBall +30 >=150 && yBall +30 <= 300){
+        if(xBall <=50 && yBall +ballSize >=150 && yBall +ballSize <= 300){
             player2MakeGoal();
             reset();
         }
-        if(xBall+30>=750 && yBall +30 >=150 && yBall +30 <= 300){
+        if(xBall+ballSize>=750 && yBall +ballSize >=150 && yBall +ballSize <= 300){
             player1MakeGoal();
             reset();
         }
