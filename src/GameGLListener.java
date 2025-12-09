@@ -9,10 +9,10 @@ import javax.media.opengl.GLCanvas;
 
 
 public class GameGLListener implements GLEventListener, KeyListener {
-    private static final int MAX_X = 800;
-    private static final int MIN_X = 0;
-    private static final int MAX_Y = 500;
-    private static final int MIN_Y = 0;
+    private static final int MAX_X = 400;
+    private static final int MIN_X = -400;
+    private static final int MAX_Y = 250;
+    private static final int MIN_Y = -250;
 
     @Override
     public void init(GLAutoDrawable glAutoDrawable) {
@@ -27,23 +27,29 @@ public class GameGLListener implements GLEventListener, KeyListener {
     public void display(GLAutoDrawable glAutoDrawable) {
         GL gl = glAutoDrawable.getGL();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
-       //drawing of the field
+        drawRect(gl,-400,0,100,MAX_Y,0.0f, 0.5f, 0.0f);
+        drawRect(gl,-300,0,100,MAX_Y,0.5f, 1.0f, 0.5f);
+        drawRect(gl,-200,0,100,MAX_Y,0.0f, 0.5f, 0.0f);
+        drawRect(gl,-100,0,100,MAX_Y,0.5f,1.0f,0.5f);
         drawRect(gl,0,0,100,MAX_Y,0.0f, 0.5f, 0.0f);
-        drawRect(gl,100,0,100,MAX_Y,0.5f, 1.0f, 0.5f);
+        drawRect(gl,100,0,100,MAX_Y,0.5f,1.0f,0.5f);
         drawRect(gl,200,0,100,MAX_Y,0.0f, 0.5f, 0.0f);
         drawRect(gl,300,0,100,MAX_Y,0.5f,1.0f,0.5f);
-        drawRect(gl,400,0,100,MAX_Y,0.0f, 0.5f, 0.0f);
-        drawRect(gl,500,0,100,MAX_Y,0.5f,1.0f,0.5f);
-        drawRect(gl,600,0,100,MAX_Y,0.0f, 0.5f, 0.0f);
-        drawRect(gl,700,0,100,MAX_Y,0.5f,1.0f,0.5f);
-        //end of field
+        drawRect(gl,-400,MIN_Y,100,250,0.0f, 0.5f, 0.0f);
+        drawRect(gl,-300,MIN_Y,100,250,0.5f, 1.0f, 0.5f);
+        drawRect(gl,-200,MIN_Y,100,250,0.0f, 0.5f, 0.0f);
+        drawRect(gl,-100,MIN_Y,100,250,0.5f,1.0f,0.5f);
+        drawRect(gl,0,MIN_Y,100,250,0.0f, 0.5f, 0.0f);
+        drawRect(gl,100,MIN_Y,100,250,0.5f,1.0f,0.5f);
+        drawRect(gl,200,MIN_Y,100,250,0.0f, 0.5f, 0.0f);
+        drawRect(gl,300,MIN_Y,100,250,0.5f,1.0f,0.5f);
+
 
         drawFieldBorder(gl);
-        drawCenterCircle(gl, 400, 250, 50);
+        drawCenterCircle(gl, 0, 0, 50);
         drawGoals(gl);
-
-
-
+        drawPlayer(gl, -350, 0, 1.0f, 0.0f, 0.0f);
+        drawPlayer(gl, 350, 0, 0.0f, 0.0f, 1.0f);
 
     }
 
@@ -90,24 +96,52 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
         // Left Goal
         gl.glBegin(GL.GL_LINE_LOOP);
-        gl.glVertex2i(0, 150);
-        gl.glVertex2i(0, 350);
-        gl.glVertex2i(50, 350);
-        gl.glVertex2i(50, 150);
+        gl.glVertex2i(-400, -100);
+        gl.glVertex2i(-400, 100);
+        gl.glVertex2i(-350, 100);
+        gl.glVertex2i(-350, -100);
         gl.glEnd();
 
         // Right Goal
         gl.glBegin(GL.GL_LINE_LOOP);
-        gl.glVertex2i(750, 150);
-        gl.glVertex2i(750, 350);
-        gl.glVertex2i(800, 350);
-        gl.glVertex2i(800, 150);
+        gl.glVertex2i(350, -100);
+        gl.glVertex2i(350, 100);
+        gl.glVertex2i(400, 100);
+        gl.glVertex2i(400, -100);
         gl.glEnd();
     }
 
-    public void drawPlayers(GL gl) {
-        gl.glColor3f(0.0f, 0.0f, 1.0f);
+    public void drawPlayer(GL gl, int centerX, int centerY, float r, float g, float b) {
+        int innerRadius = 15;
+        int outerRadius = 22;
+
+        // outer ring
+        gl.glColor3f(1.0f, 1.0f, 1.0f);
+        gl.glLineWidth(3);
+        gl.glBegin(GL.GL_LINE_LOOP);
+        for (int angle = 0; angle < 360; angle++) {
+            double rad = Math.toRadians(angle);
+            int x = (int)(centerX + outerRadius * Math.cos(rad));
+            int y = (int)(centerY + outerRadius * Math.sin(rad));
+            gl.glVertex2i(x, y);
+        }
+        gl.glEnd();
+
+        //player
+        gl.glColor3f(r, g, b);
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glVertex2i(centerX, centerY);
+        for (int angle = 0; angle <= 360; angle++) {
+            double rad = Math.toRadians(angle);
+            int x = (int)(centerX + innerRadius * Math.cos(rad));
+            int y = (int)(centerY + innerRadius * Math.sin(rad));
+            gl.glVertex2i(x, y);
+        }
+        gl.glEnd();
     }
+
+
+
 
 
 
@@ -141,14 +175,9 @@ public class GameGLListener implements GLEventListener, KeyListener {
 //        JFrame window = new JFrame("Football Field");
 //        window.setSize(820, 540);
 //        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//        // Create canvas and listener
 //        GLCanvas canvas = new GLCanvas();
 //        GameGLListener listener = new GameGLListener();
-//
 //        canvas.addGLEventListener(listener);
-//
-//
 //        window.add(canvas);
 //        window.setVisible(true);
 //
