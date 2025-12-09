@@ -11,12 +11,31 @@ public class GameGLListener implements GLEventListener, KeyListener {
     int maxHeight = 100;
     int xplayer1 = maxWidth/2, yplayer1 = maxHeight/2;
     int xplayer2 = maxWidth/2, yplayer2 = maxHeight/2;
-    double xball= maxWidth/0.2;
-    double yball= maxHeight/0.2;
+    double xBall= maxWidth/0.2;
+    double yBall= maxHeight/0.2;
     boolean playerwithball= false;
-    int ballholder=0; //0 if the ball is loose 1 if the ball is with player 1 and 2 if its with player 2
-    final int stealrange=5;
-    final double playerrange=3;
+    int ballHolder=0; //0 if the ball is loose 1 if the ball is with player 1 and 2 if its with player 2
+    final int stealRange=5;
+    final double playerRange=3;
+    private double dxBall= 8;
+    private double dyBall= 6;
+    private final double ballSize=30;
+    public void updateBall() {
+        xBall += dxBall;
+        yBall += dyBall;
+        //تغيير الاتجاه لو الكرة خبطت فى الحواف
+
+        if (xBall + ballSize >= MAX_X || xBall <= MIN_X) {
+            dxBall = -dxBall;
+        }
+        if (yBall + ballSize >= MAX_Y || yBall <= MIN_Y) {
+            dyBall = -dyBall;
+        }
+
+    }
+    public void throwBall(int player){
+        if ball
+    }
     public void handleKeyPress() {
 
         if (isKeyPressed(KeyEvent.VK_LEFT)) {
@@ -35,9 +54,10 @@ public class GameGLListener implements GLEventListener, KeyListener {
             }
         }
         if (isKeyPressed(KeyEvent.VK_UP)) {
-            if (yplayer1 < maxHeight-10) {
+            if (yplayer1 < maxHeight - 10) {
                 yplayer1++;
             }
+        }
         if (isKeyPressed(KeyEvent.VK_W)) {
             if (yplayer2 < maxHeight-10) {
                 yplayer2++;
@@ -58,6 +78,21 @@ public class GameGLListener implements GLEventListener, KeyListener {
                 yplayer2--;
             }
         }
+        if (isKeyPressed(KeyEvent.VK_PERIOD)) {
+            steal(1);
+        }
+        if (isKeyPressed(KeyEvent.VK_TAB)) {
+            steal(2);
+        }
+
+        // Player 1 Throw - SLASH (/) key
+        if (isKeyPressed(KeyEvent.VK_SLASH)) {
+            throwBall(1);
+        }
+
+        // Player 2 Throw - Q key
+        if (isKeyPressed(KeyEvent.VK_Q)) {
+            throwBall(2);
         }
 
     }
