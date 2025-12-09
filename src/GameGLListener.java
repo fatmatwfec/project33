@@ -11,6 +11,12 @@ public class GameGLListener implements GLEventListener, KeyListener {
     int maxHeight = 100;
     int xplayer1 = maxWidth/2, yplayer1 = maxHeight/2;
     int xplayer2 = maxWidth/2, yplayer2 = maxHeight/2;
+    double xball= maxWidth/0.2;
+    double yball= maxHeight/0.2;
+    boolean playerwithball= false;
+    int ballholder=0; //0 if the ball is loose 1 if the ball is with player 1 and 2 if its with player 2
+    final int stealrange=5;
+    final double playerrange=3;
     public void handleKeyPress() {
 
         if (isKeyPressed(KeyEvent.VK_LEFT)) {
