@@ -35,12 +35,10 @@ public class Game<AudioStream> extends JFrame implements ActionListener , MouseL
 
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(listener);
-        showStartWindow();
         glcanvas.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getX() < 454 && e.getX() > 328 && e.getY() < 423 && e.getY() > 387) {
-                    System.out.println("Switching to Game...");
                     new AirTable().setVisible(true);
                 }
             }
@@ -56,16 +54,16 @@ public class Game<AudioStream> extends JFrame implements ActionListener , MouseL
         glcanvas.requestFocus();
     }
 
-   private void showStartWindow() {
-       jPanel.setLayout(new GridLayout(1 , 3, 50, 50));
-       jPanel.add(UsernameTitle);
-       jPanel.add(UserName);
-       jPanel.add(space);
-       this.add(jPanel, BorderLayout.NORTH);
-       glcanvas.addMouseListener(new GameGLListener());
-       glcanvas.addMouseListener(this);
-       glcanvas.addMouseListener(new AirTableGLListener());
-   }
+//   private void showStartWindow() {
+//       jPanel.setLayout(new GridLayout(1 , 3, 50, 50));
+//       jPanel.add(UsernameTitle);
+//       jPanel.add(UserName);
+//       jPanel.add(space);
+//       this.add(jPanel, BorderLayout.NORTH);
+//       glcanvas.addMouseListener(new GameGLListener());
+//       glcanvas.addMouseListener(this);
+//       glcanvas.addMouseListener(new AirTableGLListener());
+//   }
     @Override
     public void actionPerformed(ActionEvent e) {
 
