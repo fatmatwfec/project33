@@ -7,27 +7,22 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 
 public class GameGLListener implements GLEventListener, KeyListener {
-    private static final int MAX_X = 800;
-    private static final int MIN_X = 0;
-    private static final int MAX_Y = 500;
-    private static final int MIN_Y = 0;
+    private static final int MAX_X = 400;
+    private static final int MIN_X = -400;
+    private static final int MAX_Y = 250;
+    private static final int MIN_Y = -250;
 
-    private double xBall=MAX_X/2;
-    private double yBall=MAX_Y/2;
+    private double xBall=0;
+    private double yBall=0;
     private double dxBall= 8;
     private double dyBall= 6;
     private final double ballSize=30;
-
-    int maxWidth = 100;
-    int maxHeight = 100;
-    int xplayer1 = maxWidth/2, yplayer1 = maxHeight/2;
-    int xplayer2 = maxWidth/2, yplayer2 = maxHeight/2;
 
     private int score1=0;
     private int score2=0;
     String textureName = "ball4.png";
     TextureReader.Texture texture;
-    int ballTexture[] = new int[1];
+    int[] ballTexture = new int[1];
 
     public void updateBall(){
         xBall += dxBall;
@@ -40,13 +35,13 @@ public class GameGLListener implements GLEventListener, KeyListener {
         if(yBall+ballSize>= MAX_Y || yBall <= MIN_Y){
             dyBall = -dyBall;
         }
-        // collision with players
-        if( Math.abs(xplayer1-xBall)<30 ||  Math.abs(xplayer2-xBall)<30){
-            dxBall=-dxBall;
-        }
-        if( Math.abs(yplayer1-yBall)<30 ||  Math.abs(yplayer2-yBall)<30 ){
-            dyBall=-dyBall;
-        }
+//        // collision with players
+//        if( Math.abs(xplayer1-xBall)<30 ||  Math.abs(xplayer2-xBall)<30){
+//            dxBall=-dxBall;
+//        }
+//        if( Math.abs(yplayer1-yBall)<30 ||  Math.abs(yplayer2-yBall)<30 ){
+//            dyBall=-dyBall;
+//        }
     }
 
     public void player1MakeGoal(){
@@ -74,10 +69,9 @@ public class GameGLListener implements GLEventListener, KeyListener {
             return null;
     }
     public void reset(){
-        xBall=MAX_X/2;
-        yBall=MAX_Y/2;
+        xBall=0;
+        yBall=0;
 
-        dxBall=-dxBall;
     }
 
 
@@ -147,11 +141,11 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
 
         // make goal
-        if(xBall <=50 && yBall +ballSize >=150 && yBall +ballSize <= 300){
+        if(xBall <=-350 && yBall +ballSize >=-100 && yBall +ballSize <= 100){
             player2MakeGoal();
             reset();
         }
-        if(xBall+ballSize>=750 && yBall +ballSize >=150 && yBall +ballSize <= 300){
+        if(xBall+ballSize>=350 && yBall +ballSize >=-100 && yBall +ballSize <= 100){
             player1MakeGoal();
             reset();
         }
