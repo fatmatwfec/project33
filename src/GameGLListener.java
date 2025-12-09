@@ -14,8 +14,8 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
     private double xBall=MAX_X/2;
     private double yBall=MAX_Y/2;
-    private double dxBall= 4;
-    private double dyBall= 2;
+    private double dxBall= 8;
+    private double dyBall= 6;
     private final double ballSize=30;
 
     int maxWidth = 100;
