@@ -21,8 +21,9 @@ public class GameGLListener implements GLEventListener, KeyListener {
     private int score1=0;
     private int score2=0;
     String textureName = "ball4.png";
-    TextureReader.Texture texture;
+    TextureReader.Texture texture1;
     int[] ballTexture = new int[1];
+
 
     public void updateBall(){
         xBall += dxBall;
@@ -35,13 +36,13 @@ public class GameGLListener implements GLEventListener, KeyListener {
         if(yBall+ballSize>= MAX_Y || yBall <= MIN_Y){
             dyBall = -dyBall;
         }
-//        // collision with players
-//        if( Math.abs(xplayer1-xBall)<30 ||  Math.abs(xplayer2-xBall)<30){
-//            dxBall=-dxBall;
-//        }
-//        if( Math.abs(yplayer1-yBall)<30 ||  Math.abs(yplayer2-yBall)<30 ){
-//            dyBall=-dyBall;
-//        }
+        // collision with players
+        if( Math.abs(xplayer1-xBall)<45 ||  Math.abs(xplayer2-xBall)<45){
+            dxBall=-dxBall;
+        }
+        if( Math.abs(yplayer1-yBall)<45 ||  Math.abs(yplayer2-yBall)<45 ){
+            dyBall=-dyBall;
+        }
     }
 
     public void player1MakeGoal(){
@@ -108,17 +109,17 @@ public class GameGLListener implements GLEventListener, KeyListener {
         gl.glGenTextures(1, ballTexture, 0);
 
         try {
-            texture = TextureReader.readTexture("assets//" + textureName , true);
+            texture1 = TextureReader.readTexture("assets//" + textureName , true);
             gl.glBindTexture(GL.GL_TEXTURE_2D, ballTexture[0]);
 
 
             new GLU().gluBuild2DMipmaps(
                     GL.GL_TEXTURE_2D,
                     GL.GL_RGBA,
-                    texture.getWidth(), texture.getHeight(),
+                    texture1.getWidth(), texture1.getHeight(),
                     GL.GL_RGBA,
                     GL.GL_UNSIGNED_BYTE,
-                    texture.getPixels()
+                    texture1.getPixels()
             );
         } catch( IOException e ) {
             System.out.println(e);
@@ -194,4 +195,7 @@ public class GameGLListener implements GLEventListener, KeyListener {
         gl.glDisable(GL.GL_BLEND);
 
     }
+
+
+
 }
