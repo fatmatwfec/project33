@@ -7,10 +7,16 @@ import java.util.BitSet;
 public class GameGLListener implements GLEventListener, KeyListener {
 
     public BitSet keyBits = new BitSet(256);
+    private static final int MAX_X = 400;
+    private static final int MIN_X = -400;
+    private static final int MAX_Y = 250;
+    private static final int MIN_Y = -250;
     int maxWidth = 100;
     int maxHeight = 100;
-    int xplayer1 = maxWidth/2, yplayer1 = maxHeight/2;
-    int xplayer2 = maxWidth/2, yplayer2 = maxHeight/2;
+    int xplayer1 = -350;
+    int yplayer1 = 0;
+    int xplayer2 = 350;
+    int yplayer2 = 0;
 
     public void handleKeyPress() {
 
