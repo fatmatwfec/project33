@@ -10,17 +10,16 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
 
-public class Game<AudioStream> extends JFrame implements ActionListener , MouseListener  {
+public class Game extends JFrame implements ActionListener , MouseListener  {
     private Animator animator;
     private GLCanvas glcanvas;
-    private GameListener listener = new GameGLListener();
-    private AirTableGLListener AirTable = new AirTableGLListener();
+    private StartWindow Start = new StartWindow();
+    private GameGLListener AirTable = new GameGLListener();
     JPanel jPanel = new JPanel();
     JTextField UserName = new JTextField("");
     JLabel  UsernameTitle = new JLabel("                                Player Name : " );
     JLabel space = new JLabel("                                                        ");
-    boolean onePlayer = false ;
-    boolean TwoPlayer = false ;
+
 
 
     public static void main(String[] args) {
@@ -34,12 +33,29 @@ public class Game<AudioStream> extends JFrame implements ActionListener , MouseL
 
 
         glcanvas = new GLCanvas();
-        glcanvas.addGLEventListener(listener);
+        glcanvas.addGLEventListener(Start);
+        showStartWindow();
         glcanvas.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getX() < 454 && e.getX() > 328 && e.getY() < 423 && e.getY() > 387) {
                     new AirTable().setVisible(true);
+                }
+            }
+        });
+        glcanvas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getX() < 317 && e.getX() > 194 && e.getY() < 424 && e.getY() > 387) {
+                    new level().setVisible(true);
+                }
+            }
+        });
+        glcanvas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getX() < 550  && e.getX() > 460 && e.getY() < 424 && e.getY() > 387) {
+                    new level().setVisible(true);
                 }
             }
         });
@@ -54,16 +70,15 @@ public class Game<AudioStream> extends JFrame implements ActionListener , MouseL
         glcanvas.requestFocus();
     }
 
-//   private void showStartWindow() {
-//       jPanel.setLayout(new GridLayout(1 , 3, 50, 50));
-//       jPanel.add(UsernameTitle);
-//       jPanel.add(UserName);
-//       jPanel.add(space);
-//       this.add(jPanel, BorderLayout.NORTH);
-//       glcanvas.addMouseListener(new GameGLListener());
-//       glcanvas.addMouseListener(this);
-//       glcanvas.addMouseListener(new AirTableGLListener());
-//   }
+   private void showStartWindow() {
+       jPanel.setLayout(new GridLayout(1 , 3, 50, 50));
+       jPanel.add(UsernameTitle);
+       jPanel.add(UserName);
+       jPanel.add(space);
+       this.add(jPanel, BorderLayout.NORTH);
+       glcanvas.addMouseListener(new StartWindow());
+       glcanvas.addMouseListener(this);
+   }
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -75,7 +90,7 @@ public class Game<AudioStream> extends JFrame implements ActionListener , MouseL
     }
     @Override
     public void mousePressed(MouseEvent e) {
-
+        System.out.println(e.getX()+" "+e.getY());
     }
 
     @Override

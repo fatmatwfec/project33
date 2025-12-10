@@ -16,7 +16,7 @@ public class AirTable extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         glcanvas = new GLCanvas();
-        glcanvas.addGLEventListener(new AirTableGLListener());
+        glcanvas.addGLEventListener(new GameGLListener());
         animator = new FPSAnimator(10);
         animator.add(glcanvas);
 
