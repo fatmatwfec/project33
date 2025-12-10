@@ -11,12 +11,6 @@ public class GameGLListener implements GLEventListener, KeyListener {
     int maxHeight = 100;
     int xplayer1 = maxWidth/2, yplayer1 = maxHeight/2;
     int xplayer2 = maxWidth/2, yplayer2 = maxHeight/2;
-    double xBall= maxWidth/0.2;
-    double yBall= maxHeight/0.2;
-    private double dxBall= 8;
-    private double dyBall= 6;
-    private final double ballSize=30;
-
 
     public void handleKeyPress() {
 
