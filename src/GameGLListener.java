@@ -1,3 +1,12 @@
+import javax.media.opengl.GLAutoDrawable;
+import javax.media.opengl.GLEventListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.BitSet;
+
+
+
+   
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
@@ -14,12 +23,64 @@ public class GameGLListener implements GLEventListener, KeyListener {
     private static final int MIN_X = -400;
     private static final int MAX_Y = 250;
     private static final int MIN_Y = -250;
-    private int xPlayer1 = -350;
-    private int yPlayer1 = 0;
-    private int xPlayer2 = 350;
-    private int yPlayer2 = 0;
+    public BitSet keyBits = new BitSet(256);
+    int xplayer1 = -350;
+    int yplayer1 = 0;
+    int xplayer2 = 350;
+    int yplayer2 = 0;
+
+    public void handleKeyPress() {
+
+        if (isKeyPressed(KeyEvent.VK_LEFT)) {
+            if (xplayer1 > MIN_X + 40) {
+                xplayer1-=5;
+            }
+        }
+        if (isKeyPressed(KeyEvent.VK_RIGHT)) {
+            if (xplayer1 < -40) {
+                xplayer1+=5;
+            }
+        }
+        if (isKeyPressed(KeyEvent.VK_DOWN)) {
+            if (yplayer1 > MIN_Y + 40) {
+                yplayer1-=5;
+            }
+        }
+        if (isKeyPressed(KeyEvent.VK_UP)) {
+            if (yplayer1 < MAX_Y - 40) {
+                yplayer1+=5;
+            }
+        }
+        if (isKeyPressed(KeyEvent.VK_W)) {
+            if (yplayer2 < MAX_Y - 40) {
+                yplayer2+=5;
+            }
+        }
+        if (isKeyPressed(KeyEvent.VK_A)) {
+            if (xplayer2 >  40) {
+                xplayer2-=5;
+            }
+        }
+        if (isKeyPressed(KeyEvent.VK_D)) {
+            if (xplayer2 < MAX_X - 40) {
+                xplayer2+=5;
+            }
+        }
+        if (isKeyPressed(KeyEvent.VK_S)) {
+            if (yplayer2 > MIN_Y + 40) {
+                yplayer2-=5;
+            }
+        }
 
 
+
+    }
+    public boolean isKeyPressed(final int keyCode) {
+        return keyBits.get(keyCode);
+    }
+}
+public BitSet keyBits = new BitSet(256);
+   
     private double xBall=0;
     private double yBall=0;
     private double dxBall= 8;
@@ -89,12 +150,14 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        int keyCode = e.getKeyCode();
+        keyBits.set(keyCode);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        int keyCode = e.getKeyCode();
+        keyBits.clear(keyCode);
     }
 
     @Override
@@ -327,22 +390,6 @@ public class GameGLListener implements GLEventListener, KeyListener {
         text.setColor(Color.blue);
         text.draw("player2 : "+String.valueOf(score2), 210, 235);
         text.endRendering();
-    }
-
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
     }
 }
 
