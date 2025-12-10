@@ -35,14 +35,14 @@ public class Game extends JFrame implements ActionListener , MouseListener  {
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(Start);
         showStartWindow();
-        glcanvas.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (e.getX() < 454 && e.getX() > 328 && e.getY() < 423 && e.getY() > 387) {
-                    new AirTable().setVisible(true);
-                }
-            }
-        });
+//        glcanvas.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//                if (e.getX() < 454 && e.getX() > 328 && e.getY() < 423 && e.getY() > 387) {
+//                    new AirTable().setVisible(true);
+//                }
+//            }
+//        });
         glcanvas.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -55,7 +55,7 @@ public class Game extends JFrame implements ActionListener , MouseListener  {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getX() < 550  && e.getX() > 460 && e.getY() < 424 && e.getY() > 387) {
-                    new level().setVisible(true);
+                    new AirTable().setVisible(true);
                 }
             }
         });

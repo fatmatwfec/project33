@@ -1,5 +1,3 @@
-package TextureReader;
-
 import com.sun.opengl.util.BufferUtil;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

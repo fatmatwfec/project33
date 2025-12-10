@@ -1,4 +1,3 @@
-import Texture.TextureReader;
 import com.sun.opengl.util.Animator;
 import com.sun.opengl.util.FPSAnimator;
 

@@ -1,10 +1,6 @@
-import Texture.TextureReader;
-
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -13,17 +9,16 @@ import javax.media.opengl.glu.GLU;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.JFrame;
-import javax.media.opengl.GLCanvas;
 
-public class StartWindow extends GameListener implements GLEventListener,  MouseListener {
+public class StartWindow implements GLEventListener,  MouseListener {
     String textureNames[] = {"air hockey start window.png"};
     TextureReader.Texture texture[] = new TextureReader.Texture[textureNames.length];
     int textures[] = new int[textureNames.length];
+    protected String assetsFolderName = ".idea\\picture";
     GL gl;
     GLAutoDrawable glAutoDrawable;
     static Clip clip;
-    File f = new File("D:\\New folder\\project33\\.idea\\Sound\\Air hockey sound.wav");
+    File f = new File(".idea\\Sound\\Air hockey sound.wav");
 
 
     @Override
@@ -37,7 +32,7 @@ public class StartWindow extends GameListener implements GLEventListener,  Mouse
         gl.glGenTextures(textureNames.length, textures, 0);
         for (int i = 0; i < textureNames.length; i++) {
             try {
-                texture[i] = TextureReader.readTexture(assetsFolderName + "//" + textureNames[i], true);
+                texture[i] = TextureReader.readTexture(".idea\\picture" + "//" + textureNames[i], true);
                 gl.glBindTexture(GL.GL_TEXTURE_2D, textures[i]);
 
 //              mipmapsFromPNG(gl, new GLU(), texture[i]);
