@@ -11,8 +11,6 @@ public class GameGLListener implements GLEventListener, KeyListener {
     private static final int MIN_X = -400;
     private static final int MAX_Y = 250;
     private static final int MIN_Y = -250;
-    int maxWidth = 100;
-    int maxHeight = 100;
     int xplayer1 = -350;
     int yplayer1 = 0;
     int xplayer2 = 350;
@@ -21,43 +19,43 @@ public class GameGLListener implements GLEventListener, KeyListener {
     public void handleKeyPress() {
 
         if (isKeyPressed(KeyEvent.VK_LEFT)) {
-            if (xplayer1 > 0) {
-                xplayer1--;
+            if (xplayer1 > MIN_X + 40) {
+                xplayer1-=5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_RIGHT)) {
-            if (xplayer1 < maxWidth-10) {
-                xplayer1++;
+            if (xplayer1 < -40) {
+                xplayer1+=5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_DOWN)) {
-            if (yplayer1 > 0) {
-                yplayer1--;
+            if (yplayer1 > MIN_Y + 40) {
+                yplayer1-=5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_UP)) {
-            if (yplayer1 < maxHeight - 10) {
-                yplayer1++;
+            if (yplayer1 < MAX_Y - 40) {
+                yplayer1+=5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_W)) {
-            if (yplayer2 < maxHeight-10) {
-                yplayer2++;
+            if (yplayer2 < MAX_Y - 40) {
+                yplayer2+=5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_A)) {
-            if (xplayer2 > 0) {
-                xplayer2--;
+            if (xplayer2 >  40) {
+                xplayer2-=5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_D)) {
-            if (xplayer2 < maxWidth-10) {
-                xplayer2++;
+            if (xplayer2 < MAX_X - 40) {
+                xplayer2+=5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_S)) {
-            if (yplayer2 > 0) {
-                yplayer2--;
+            if (yplayer2 > MIN_Y + 40) {
+                yplayer2-=5;
             }
         }
 
