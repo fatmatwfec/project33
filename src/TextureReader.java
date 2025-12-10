@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 
+
 public class TextureReader {
     public static Texture readTexture(String filename) throws IOException {
         return readTexture(filename, false);
