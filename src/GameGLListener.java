@@ -13,6 +13,11 @@ public class GameGLListener implements GLEventListener, KeyListener {
     private static final int MIN_X = -400;
     private static final int MAX_Y = 250;
     private static final int MIN_Y = -250;
+    private int xPlayer1 = -350;
+    private int yPlayer1 = 0;
+    private int xPlayer2 = 350;
+    private int yPlayer2 = 0;
+
 
     @Override
     public void init(GLAutoDrawable glAutoDrawable) {
@@ -48,8 +53,8 @@ public class GameGLListener implements GLEventListener, KeyListener {
         drawFieldBorder(gl);
         drawCenterCircle(gl, 0, 0, 50);
         drawGoals(gl);
-        drawPlayer(gl, -350, 0, 1.0f, 0.0f, 0.0f);
-        drawPlayer(gl, 350, 0, 0.0f, 0.0f, 1.0f);
+        drawPlayer(gl, xPlayer1, yPlayer1, 1.0f, 0.0f, 0.0f);
+        drawPlayer(gl, xPlayer2, yPlayer2, 0.0f, 0.0f, 1.0f);
 
     }
 
@@ -77,8 +82,7 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
     public void drawCenterCircle(GL gl, int centerX, int centerY, int radius) {
         gl.glColor3f(1.0f, 1.0f, 1.0f);
-        gl.glLineWidth(3);
-
+        gl.glPointSize(3.0f);
         gl.glBegin(GL.GL_LINE_LOOP);
         for (int angle = 0; angle < 360; angle++) {
             double rad = Math.toRadians(angle);
@@ -92,8 +96,7 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
     public void drawGoals(GL gl) {
         gl.glColor3f(1.0f, 1.0f, 1.0f);
-        gl.glLineWidth(3);
-
+        gl.glPointSize(3.0f);
         // Left Goal
         gl.glBegin(GL.GL_LINE_LOOP);
         gl.glVertex2i(-400, -100);
