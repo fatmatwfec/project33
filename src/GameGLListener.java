@@ -41,12 +41,12 @@ public class GameGLListener implements GLEventListener, KeyListener {
             dyBall = -dyBall;
         }
         // collision with players
-        if( Math.abs(xplayer1-xBall)<45 ||  Math.abs(xplayer2-xBall)<45){
-            dxBall=-dxBall;
-        }
-        if( Math.abs(yplayer1-yBall)<45 ||  Math.abs(yplayer2-yBall)<45 ){
-            dyBall=-dyBall;
-        }
+//        if( Math.abs(xplayer1-xBall)<45 ||  Math.abs(xplayer2-xBall)<45){
+//            dxBall=-dxBall;
+//        }
+//        if( Math.abs(yplayer1-yBall)<45 ||  Math.abs(yplayer2-yBall)<45 ){
+//            dyBall=-dyBall;
+//        }
     }
 
     public void player1MakeGoal(){
@@ -299,11 +299,6 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
     }
 
-
-
-}
-
-
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -318,20 +313,6 @@ public class GameGLListener implements GLEventListener, KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
-
-//    public static void main(String[] args) {
-//        JFrame window = new JFrame("Football Field");
-//        window.setSize(820, 540);
-//        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        GLCanvas canvas = new GLCanvas();
-//        GameGLListener listener = new GameGLListener();
-//        canvas.addGLEventListener(listener);
-//        window.add(canvas);
-//        window.setVisible(true);
-//
-//
-//    }
-
 }
 
 
