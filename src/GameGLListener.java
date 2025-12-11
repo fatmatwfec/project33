@@ -110,6 +110,12 @@ public class GameGLListener implements GLEventListener, KeyListener {
             dyBall = -dyBall;
         }
 //        // collision with players
+        if (Math.sqrt(Math.pow(xplayer1-xBall,2)+Math.pow(yplayer1-yBall,2))<30){
+            dxBall=-dxBall;
+        }
+        if (Math.sqrt(Math.pow(xplayer2-xBall,2)+Math.pow(yplayer2-yBall,2))<30){
+            dxBall=-dxBall;
+        }
 
     }
 
