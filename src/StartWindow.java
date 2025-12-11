@@ -38,7 +38,7 @@ public class StartWindow implements GLEventListener,  MouseListener {
         gl.glLoadIdentity();
         gl.glEnable(GL.GL_TEXTURE_2D);  // Enable Texture Mapping
         gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
-//        onSound();
+        onSound();
         //number of textures,array to hold the indeces
         gl.glGenTextures(textureNames.length, textures, 0);
         for (int i = 0; i < textureNames.length; i++) {
