@@ -33,53 +33,52 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
         if (isKeyPressed(KeyEvent.VK_LEFT)) {
             if (xplayer1 > MIN_X + 40) {
-                xplayer1-=5;
+                xplayer1 -= 5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_RIGHT)) {
             if (xplayer1 < -40) {
-                xplayer1+=5;
+                xplayer1 += 5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_DOWN)) {
             if (yplayer1 > MIN_Y + 40) {
-                yplayer1-=5;
+                yplayer1 -= 5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_UP)) {
             if (yplayer1 < MAX_Y - 40) {
-                yplayer1+=5;
+                yplayer1 += 5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_W)) {
             if (yplayer2 < MAX_Y - 40) {
-                yplayer2+=5;
+                yplayer2 += 5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_A)) {
-            if (xplayer2 >  40) {
-                xplayer2-=5;
+            if (xplayer2 > 40) {
+                xplayer2 -= 5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_D)) {
             if (xplayer2 < MAX_X - 40) {
-                xplayer2+=5;
+                xplayer2 += 5;
             }
         }
         if (isKeyPressed(KeyEvent.VK_S)) {
             if (yplayer2 > MIN_Y + 40) {
-                yplayer2-=5;
+                yplayer2 -= 5;
             }
         }
-
 
 
     }
     public boolean isKeyPressed(final int keyCode) {
         return keyBits.get(keyCode);
     }
-}
-public BitSet keyBits = new BitSet(256);
+
+//public BitSet keyBits = new BitSet(256);
    
     private double xBall=0;
     private double yBall=0;
@@ -201,6 +200,7 @@ public BitSet keyBits = new BitSet(256);
     public void display(GLAutoDrawable glAutoDrawable) {
 
         GL gl=glAutoDrawable.getGL();
+        handleKeyPress();
 
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
         gl.glDisable(GL.GL_TEXTURE_2D);
@@ -228,8 +228,8 @@ public BitSet keyBits = new BitSet(256);
         drawFieldBorder(gl);
         drawCenterCircle(gl, 0, 0, 50);
         drawGoals(gl);
-        drawPlayer(gl, xPlayer1, yPlayer1, 1.0f, 0.0f, 0.0f);
-        drawPlayer(gl, xPlayer2, yPlayer2, 0.0f, 0.0f, 1.0f);
+        drawPlayer(gl, xplayer1, yplayer1, 1.0f, 0.0f, 0.0f);
+        drawPlayer(gl, xplayer2, yplayer2, 0.0f, 0.0f, 1.0f);
         
         
         gl.glEnable(GL.GL_TEXTURE_2D);

@@ -20,11 +20,22 @@ public class StartWindow implements GLEventListener,  MouseListener {
     static Clip clip;
     File f = new File(".idea\\Sound\\Air hockey sound.wav");
 
+    private static final int MAX_X = 400;
+    private static final int MIN_X = -400;
+    private static final int MAX_Y = 250;
+    private static final int MIN_Y = -250;
+
 
     @Override
     public void init(GLAutoDrawable glAutoDrawable) {
         GL gl = glAutoDrawable.getGL();
-        gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);  //This Will Clear The Background Color To Black
+        gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        gl.glMatrixMode(GL.GL_PROJECTION);
+        gl.glLoadIdentity();
+        gl.glOrtho(MIN_X, MAX_X, MIN_Y, MAX_Y, -1.0, 1.0);
+
+        gl.glMatrixMode(GL.GL_MODELVIEW);
+        gl.glLoadIdentity();
         gl.glEnable(GL.GL_TEXTURE_2D);  // Enable Texture Mapping
         gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 //        onSound();
@@ -67,13 +78,13 @@ public class StartWindow implements GLEventListener,  MouseListener {
         gl.glBegin(GL.GL_QUADS);
         // Front Face
         gl.glTexCoord2f(0.0f, 0.0f);
-        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glVertex3f(MIN_X, MIN_Y, -1.0f);
         gl.glTexCoord2f(1.0f, 0.0f);
-        gl.glVertex3f(1.0f, -1.0f, -1.0f);
+        gl.glVertex3f(MAX_X, MIN_Y, -1.0f);
         gl.glTexCoord2f(1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+        gl.glVertex3f(MAX_X, MAX_Y, -1.0f);
         gl.glTexCoord2f(0.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+        gl.glVertex3f(MIN_X, MAX_Y, -1.0f);
         gl.glEnd();
         gl.glPopMatrix();
 

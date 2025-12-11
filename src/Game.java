@@ -23,7 +23,7 @@ public class Game extends JFrame implements ActionListener , MouseListener  {
 
 
     public static void main(String[] args) {
-        new Game().animator.start();
+        new Game();
         // ابدأ بالقائمة
     }
 
@@ -34,33 +34,27 @@ public class Game extends JFrame implements ActionListener , MouseListener  {
 
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(Start);
+
+        glcanvas.addKeyListener(AirTable);
+        glcanvas.setFocusable(true);
+        glcanvas.requestFocusInWindow();
+
         showStartWindow();
-//        glcanvas.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                if (e.getX() < 454 && e.getX() > 328 && e.getY() < 423 && e.getY() > 387) {
-//                    new AirTable().setVisible(true);
-//                }
-//            }
-//        });
-        glcanvas.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (e.getX() < 317 && e.getX() > 194 && e.getY() < 424 && e.getY() > 387) {
-                    new level().setVisible(true);
-                }
-            }
-        });
+//
         glcanvas.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getX() < 550  && e.getX() > 460 && e.getY() < 424 && e.getY() > 387) {
-                    new AirTable().setVisible(true);
+                    glcanvas.removeGLEventListener(Start);
+                    glcanvas.addGLEventListener(AirTable);
+                    glcanvas.removeMouseListener(this);
+                    glcanvas.requestFocusInWindow();
                 }
             }
         });
         animator = new FPSAnimator(10);
         animator.add(glcanvas);
+        animator.start();
 
         getContentPane().add(glcanvas, BorderLayout.CENTER);
         setSize(800, 500);
