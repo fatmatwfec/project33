@@ -3,6 +3,7 @@ import javax.media.opengl.GLEventListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.BitSet;
+import javax.swing.JOptionPane;
 
 
 
@@ -28,6 +29,7 @@ public class GameGLListener implements GLEventListener, KeyListener {
     int yplayer1 = 0;
     int xplayer2 = 350;
     int yplayer2 = 0;
+    boolean winnerShown = false;
 
     public void handleKeyPress() {
 
@@ -129,9 +131,9 @@ public class GameGLListener implements GLEventListener, KeyListener {
     }
     public String winner(){
         if(score1==3)
-            return "player1 is win";
+            return "player1 is the winner :)";
         else if(score2==3)
-            return "player2 is win";
+            return "player2 is the winner :)";
         else
             return null;
     }
@@ -248,9 +250,21 @@ public class GameGLListener implements GLEventListener, KeyListener {
             reset();
         }
         // win massage
-        if (hasWinner()) {
-            System.out.println(winner());
+        if (hasWinner()&& !winnerShown) {
+            String winnerMessage = winner();
+            System.out.println(winnerMessage);
+            JOptionPane.showMessageDialog(
+                    null,  // parent component (null means center on screen)
+                    winnerMessage,  // message
+                    "Game Over",  // title
+                    JOptionPane.INFORMATION_MESSAGE  // message type
+            );
 
+            // Exit the game like in your example
+            System.exit(0);
+
+            // Set flag so dialog doesn't show multiple times
+            winnerShown = true;
         }
         drawScore();
     }
