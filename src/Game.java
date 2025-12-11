@@ -19,6 +19,7 @@ public class Game extends JFrame implements ActionListener , MouseListener  {
     JTextField UserName = new JTextField("");
     JLabel  UsernameTitle = new JLabel("                                Player Name : " );
     JLabel space = new JLabel("                                                        ");
+    JButton Exit = new JButton();
 
 
 
@@ -34,20 +35,19 @@ public class Game extends JFrame implements ActionListener , MouseListener  {
 
         glcanvas = new GLCanvas();
         glcanvas.addGLEventListener(Start);
-
         glcanvas.addKeyListener(AirTable);
         glcanvas.setFocusable(true);
         glcanvas.requestFocusInWindow();
 
         showStartWindow();
-//
+
         glcanvas.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (e.getX() < 550  && e.getX() > 460 && e.getY() < 424 && e.getY() > 387) {
+                if (e.getX() < 454  && e.getX() > 331 && e.getY() < 427 && e.getY() > 387) {
                     glcanvas.removeGLEventListener(Start);
                     glcanvas.addGLEventListener(AirTable);
-                    glcanvas.removeMouseListener(this);
+//                  glcanvas.removeMouseListener(this);
                     glcanvas.requestFocusInWindow();
                 }
             }
@@ -65,7 +65,7 @@ public class Game extends JFrame implements ActionListener , MouseListener  {
     }
 
    private void showStartWindow() {
-       jPanel.setLayout(new GridLayout(1 , 3, 50, 50));
+       jPanel.setLayout(new GridLayout(1, 3, 50, 50));
        jPanel.add(UsernameTitle);
        jPanel.add(UserName);
        jPanel.add(space);
