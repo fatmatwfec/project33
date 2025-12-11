@@ -29,44 +29,61 @@ public class GameGLListener implements GLEventListener, KeyListener {
     int xplayer2 = 350;
     int yplayer2 = 0;
 
+    private int xBall=0;
+    private int yBall=0;
+    private int dxBall= 8;
+    private int dyBall= 6;
+    private final int ballSize=30;
+
+
+
+    private int score1=0;
+    private int score2=0;
+    String textureName = "ball4.png";
+    TextureReader.Texture texture1;
+    int[] ballTexture = new int[1];
+
+    private TextRenderer text = new TextRenderer(new Font("SansSerif", Font.BOLD, 10));
+
+
     public void handleKeyPress() {
 
-        if (isKeyPressed(KeyEvent.VK_LEFT)) {
+        if (isKeyPressed(KeyEvent.VK_A)) {
             if (xplayer1 > MIN_X + 40) {
                 xplayer1 -= 5;
             }
         }
-        if (isKeyPressed(KeyEvent.VK_RIGHT)) {
+        if (isKeyPressed(KeyEvent.VK_D)) {
             if (xplayer1 < -40) {
                 xplayer1 += 5;
             }
         }
-        if (isKeyPressed(KeyEvent.VK_DOWN)) {
+        if (isKeyPressed(KeyEvent.VK_S)) {
             if (yplayer1 > MIN_Y + 40) {
                 yplayer1 -= 5;
             }
         }
-        if (isKeyPressed(KeyEvent.VK_UP)) {
+        if (isKeyPressed(KeyEvent.VK_W)) {
             if (yplayer1 < MAX_Y - 40) {
                 yplayer1 += 5;
             }
         }
-        if (isKeyPressed(KeyEvent.VK_W)) {
+        if (isKeyPressed(KeyEvent.VK_UP)) {
             if (yplayer2 < MAX_Y - 40) {
                 yplayer2 += 5;
             }
         }
-        if (isKeyPressed(KeyEvent.VK_A)) {
+        if (isKeyPressed(KeyEvent.VK_LEFT)) {
             if (xplayer2 > 40) {
                 xplayer2 -= 5;
             }
         }
-        if (isKeyPressed(KeyEvent.VK_D)) {
+        if (isKeyPressed(KeyEvent.VK_RIGHT)) {
             if (xplayer2 < MAX_X - 40) {
                 xplayer2 += 5;
             }
         }
-        if (isKeyPressed(KeyEvent.VK_S)) {
+        if (isKeyPressed(KeyEvent.VK_DOWN)) {
             if (yplayer2 > MIN_Y + 40) {
                 yplayer2 -= 5;
             }
@@ -80,21 +97,7 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
 //public BitSet keyBits = new BitSet(256);
    
-    private double xBall=0;
-    private double yBall=0;
-    private double dxBall= 8;
-    private double dyBall= 6;
-    private final double ballSize=30;
 
-
-
-    private int score1=0;
-    private int score2=0;
-    String textureName = "ball4.png";
-    TextureReader.Texture texture1;
-    int[] ballTexture = new int[1];
-
-    private TextRenderer text = new TextRenderer(new Font("SansSerif", Font.BOLD, 10));
 
     public void updateBall(){
         xBall += dxBall;
@@ -109,6 +112,12 @@ public class GameGLListener implements GLEventListener, KeyListener {
         }
 //        // collision with players
 
+        if (Math.sqrt(Math.pow(xplayer1-xBall,2)+Math.pow(yplayer1-yBall,2))<30){
+            dxBall=-dxBall;
+        }
+        if (Math.sqrt(Math.pow(xplayer2-xBall,2)+Math.pow(yplayer2-yBall,2))<30){
+            dxBall=-dxBall;
+        }
     }
 
     public void player1MakeGoal(){
@@ -128,8 +137,10 @@ public class GameGLListener implements GLEventListener, KeyListener {
             return false;
     }
     public String winner(){
-        if(score1==3)
+        if(score1==3){
             return "player1 is win";
+        }
+
         else if(score2==3)
             return "player2 is win";
         else
@@ -250,9 +261,12 @@ public class GameGLListener implements GLEventListener, KeyListener {
         // win massage
         if (hasWinner()) {
             System.out.println(winner());
-
         }
+
         drawScore();
+
+
+
     }
 
     public void drawRect( GL gl,int x,int y,int width,int height,float r,float g,float b) {
@@ -391,6 +405,8 @@ public class GameGLListener implements GLEventListener, KeyListener {
         text.draw("player2 : "+String.valueOf(score2), 210, 235);
         text.endRendering();
     }
+
+
 }
 
 
