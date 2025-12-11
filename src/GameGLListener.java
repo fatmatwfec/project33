@@ -33,42 +33,42 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
         if (isKeyPressed(KeyEvent.VK_A)) {
             if (xplayer1 > MIN_X + 40) {
-                xplayer1 -= 5;
+                xplayer1 -= 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_D)) {
             if (xplayer1 < -40) {
-                xplayer1 += 5;
+                xplayer1 += 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_S)) {
             if (yplayer1 > MIN_Y + 40) {
-                yplayer1 -= 5;
+                yplayer1 -= 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_W)) {
             if (yplayer1 < MAX_Y - 40) {
-                yplayer1 += 5;
+                yplayer1 += 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_UP)) {
             if (yplayer2 < MAX_Y - 40) {
-                yplayer2 += 5;
+                yplayer2 += 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_LEFT)) {
             if (xplayer2 > 40) {
-                xplayer2 -= 5;
+                xplayer2 -= 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_RIGHT)) {
             if (xplayer2 < MAX_X - 40) {
-                xplayer2 += 5;
+                xplayer2 += 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_DOWN)) {
             if (yplayer2 > MIN_Y + 40) {
-                yplayer2 -= 5;
+                yplayer2 -= 10;
             }
         }
 
