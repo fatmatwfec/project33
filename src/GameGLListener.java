@@ -3,6 +3,7 @@ import javax.media.opengl.GLEventListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.BitSet;
+import javax.swing.JOptionPane;
 
 
 
@@ -28,12 +29,13 @@ public class GameGLListener implements GLEventListener, KeyListener {
     int yplayer1 = 0;
     int xplayer2 = 350;
     int yplayer2 = 0;
+    boolean winnerShown = false;
 
-    private int xBall=0;
-    private int yBall=0;
-    private int dxBall= 8;
-    private int dyBall= 6;
-    private final int ballSize=30;
+    private double xBall=0;
+    private double yBall=0;
+    private double dxBall= 8;
+    private double dyBall= 6;
+    private final double ballSize=30;
 
 
 
@@ -45,47 +47,46 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
     private TextRenderer text = new TextRenderer(new Font("SansSerif", Font.BOLD, 10));
 
-
     public void handleKeyPress() {
 
         if (isKeyPressed(KeyEvent.VK_A)) {
             if (xplayer1 > MIN_X + 40) {
-                xplayer1 -= 5;
+                xplayer1 -= 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_D)) {
             if (xplayer1 < -40) {
-                xplayer1 += 5;
+                xplayer1 += 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_S)) {
             if (yplayer1 > MIN_Y + 40) {
-                yplayer1 -= 5;
+                yplayer1 -= 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_W)) {
             if (yplayer1 < MAX_Y - 40) {
-                yplayer1 += 5;
+                yplayer1 += 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_UP)) {
             if (yplayer2 < MAX_Y - 40) {
-                yplayer2 += 5;
+                yplayer2 += 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_LEFT)) {
             if (xplayer2 > 40) {
-                xplayer2 -= 5;
+                xplayer2 -= 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_RIGHT)) {
             if (xplayer2 < MAX_X - 40) {
-                xplayer2 += 5;
+                xplayer2 += 10;
             }
         }
         if (isKeyPressed(KeyEvent.VK_DOWN)) {
             if (yplayer2 > MIN_Y + 40) {
-                yplayer2 -= 5;
+                yplayer2 -= 10;
             }
         }
 
@@ -111,13 +112,13 @@ public class GameGLListener implements GLEventListener, KeyListener {
             dyBall = -dyBall;
         }
 //        // collision with players
-
         if (Math.sqrt(Math.pow(xplayer1-xBall,2)+Math.pow(yplayer1-yBall,2))<30){
             dxBall=-dxBall;
         }
         if (Math.sqrt(Math.pow(xplayer2-xBall,2)+Math.pow(yplayer2-yBall,2))<30){
             dxBall=-dxBall;
         }
+
     }
 
     public void player1MakeGoal(){
@@ -137,12 +138,10 @@ public class GameGLListener implements GLEventListener, KeyListener {
             return false;
     }
     public String winner(){
-        if(score1==3){
-            return "player1 is win";
-        }
-
+        if(score1==3)
+            return "player1 is the winner :)";
         else if(score2==3)
-            return "player2 is win";
+            return "player2 is the winner :)";
         else
             return null;
     }
@@ -244,6 +243,7 @@ public class GameGLListener implements GLEventListener, KeyListener {
         
         
         gl.glEnable(GL.GL_TEXTURE_2D);
+        gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
         drawBall(gl,xBall,yBall,30);
         //update ball position
         updateBall();
@@ -258,15 +258,23 @@ public class GameGLListener implements GLEventListener, KeyListener {
             player1MakeGoal();
             reset();
         }
-        // win massage
-        if (hasWinner()) {
-            System.out.println(winner());
+
+        if (hasWinner()&& !winnerShown) {
+            String winnerMessage = winner();
+            System.out.println(winnerMessage);
+            JOptionPane.showMessageDialog(
+                    null,
+                    winnerMessage,
+                    "Game Over",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            System.exit(0);
+
+
+            winnerShown = true;
         }
-
         drawScore();
-
-
-
     }
 
     public void drawRect( GL gl,int x,int y,int width,int height,float r,float g,float b) {
@@ -372,29 +380,40 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
 
 
-        gl.glEnable(GL.GL_BLEND);
-        gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+//        gl.glEnable(GL.GL_BLEND);
+//        gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+//
+//
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, ballTexture[0]);
+//
+//
+//
+//        gl.glBegin(GL.GL_QUADS);
+//
+//        gl.glTexCoord2f(0.0f, 0.0f);
+//        gl.glVertex3d(xBall, yBall, -1.0);
+//        gl.glTexCoord2f(1.0f, 0.0f);
+//        gl.glVertex3d(xBall+size, yBall, -1.0);
+//        gl.glTexCoord2f(1.0f, 1.0f);
+//        gl.glVertex3d(xBall+size, yBall+size, -1.0);
+//        gl.glTexCoord2f(0.0f, 1.0f);
+//        gl.glVertex3d(xBall, yBall+size, -1.0);
+//        gl.glEnd();
+//
+//
+//
+//        gl.glDisable(GL.GL_BLEND);
 
+        gl.glColor3f(0.0f,0.0f,0.0f);
 
-        gl.glBindTexture(GL.GL_TEXTURE_2D, ballTexture[0]);
+        gl.glBegin(GL.GL_POLYGON);
+        for ( double theta=0 ; theta< 2 * Math.PI; theta += Math.PI / 180) {
 
-
-
-        gl.glBegin(GL.GL_QUADS);
-
-        gl.glTexCoord2f(0.0f, 0.0f);
-        gl.glVertex3d(xBall, yBall, 0.0);
-        gl.glTexCoord2f(1.0f, 0.0f);
-        gl.glVertex3d(xBall+size, yBall, 0.0);
-        gl.glTexCoord2f(1.0f, 1.0f);
-        gl.glVertex3d(xBall+size, yBall+size, 0.0);
-        gl.glTexCoord2f(0.0f, 1.0f);
-        gl.glVertex3d(xBall, yBall+size, 0.0);
+            double x = xBall+ ballSize/2 * Math.cos(theta);
+           double y =yBall+ ballSize/2 * Math.sin(theta);
+            gl.glVertex2d(x , y );
+        }
         gl.glEnd();
-
-
-
-        gl.glDisable(GL.GL_BLEND);
 
     }
     public void drawScore(){
@@ -405,8 +424,6 @@ public class GameGLListener implements GLEventListener, KeyListener {
         text.draw("player2 : "+String.valueOf(score2), 210, 235);
         text.endRendering();
     }
-
-
 }
 
 
