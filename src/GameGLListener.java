@@ -249,21 +249,20 @@ public class GameGLListener implements GLEventListener, KeyListener {
             player1MakeGoal();
             reset();
         }
-        // win massage
+
         if (hasWinner()&& !winnerShown) {
             String winnerMessage = winner();
             System.out.println(winnerMessage);
             JOptionPane.showMessageDialog(
-                    null,  // parent component (null means center on screen)
-                    winnerMessage,  // message
-                    "Game Over",  // title
-                    JOptionPane.INFORMATION_MESSAGE  // message type
+                    null,
+                    winnerMessage,
+                    "Game Over",
+                    JOptionPane.INFORMATION_MESSAGE
             );
 
-            // Exit the game like in your example
             System.exit(0);
 
-            // Set flag so dialog doesn't show multiple times
+
             winnerShown = true;
         }
         drawScore();
