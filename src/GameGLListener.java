@@ -241,6 +241,7 @@ public class GameGLListener implements GLEventListener, KeyListener {
         
         
         gl.glEnable(GL.GL_TEXTURE_2D);
+        gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
         drawBall(gl,xBall,yBall,30);
         //update ball position
         updateBall();
@@ -377,29 +378,40 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
 
 
-        gl.glEnable(GL.GL_BLEND);
-        gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+//        gl.glEnable(GL.GL_BLEND);
+//        gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+//
+//
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, ballTexture[0]);
+//
+//
+//
+//        gl.glBegin(GL.GL_QUADS);
+//
+//        gl.glTexCoord2f(0.0f, 0.0f);
+//        gl.glVertex3d(xBall, yBall, -1.0);
+//        gl.glTexCoord2f(1.0f, 0.0f);
+//        gl.glVertex3d(xBall+size, yBall, -1.0);
+//        gl.glTexCoord2f(1.0f, 1.0f);
+//        gl.glVertex3d(xBall+size, yBall+size, -1.0);
+//        gl.glTexCoord2f(0.0f, 1.0f);
+//        gl.glVertex3d(xBall, yBall+size, -1.0);
+//        gl.glEnd();
+//
+//
+//
+//        gl.glDisable(GL.GL_BLEND);
 
+        gl.glColor3f(0.0f,0.0f,0.0f);
 
-        gl.glBindTexture(GL.GL_TEXTURE_2D, ballTexture[0]);
+        gl.glBegin(GL.GL_POLYGON);
+        for ( double theta=0 ; theta< 2 * Math.PI; theta += Math.PI / 180) {
 
-
-
-        gl.glBegin(GL.GL_QUADS);
-
-        gl.glTexCoord2f(0.0f, 0.0f);
-        gl.glVertex3d(xBall, yBall, 0.0);
-        gl.glTexCoord2f(1.0f, 0.0f);
-        gl.glVertex3d(xBall+size, yBall, 0.0);
-        gl.glTexCoord2f(1.0f, 1.0f);
-        gl.glVertex3d(xBall+size, yBall+size, 0.0);
-        gl.glTexCoord2f(0.0f, 1.0f);
-        gl.glVertex3d(xBall, yBall+size, 0.0);
+            double x = xBall+ ballSize/2 * Math.cos(theta);
+           double y =yBall+ ballSize/2 * Math.sin(theta);
+            gl.glVertex2d(x , y );
+        }
         gl.glEnd();
-
-
-
-        gl.glDisable(GL.GL_BLEND);
 
     }
     public void drawScore(){
