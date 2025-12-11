@@ -31,6 +31,22 @@ public class GameGLListener implements GLEventListener, KeyListener {
     int yplayer2 = 0;
     boolean winnerShown = false;
 
+    private double xBall=0;
+    private double yBall=0;
+    private double dxBall= 8;
+    private double dyBall= 6;
+    private final double ballSize=30;
+
+
+
+    private int score1=0;
+    private int score2=0;
+    String textureName = "ball4.png";
+    TextureReader.Texture texture1;
+    int[] ballTexture = new int[1];
+
+    private TextRenderer text = new TextRenderer(new Font("SansSerif", Font.BOLD, 10));
+
     public void handleKeyPress() {
 
         if (isKeyPressed(KeyEvent.VK_A)) {
@@ -82,21 +98,7 @@ public class GameGLListener implements GLEventListener, KeyListener {
 
 //public BitSet keyBits = new BitSet(256);
    
-    private double xBall=0;
-    private double yBall=0;
-    private double dxBall= 8;
-    private double dyBall= 6;
-    private final double ballSize=30;
 
-
-
-    private int score1=0;
-    private int score2=0;
-    String textureName = "ball4.png";
-    TextureReader.Texture texture1;
-    int[] ballTexture = new int[1];
-
-    private TextRenderer text = new TextRenderer(new Font("SansSerif", Font.BOLD, 10));
 
     public void updateBall(){
         xBall += dxBall;
